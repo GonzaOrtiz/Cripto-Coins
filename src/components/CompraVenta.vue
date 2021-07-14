@@ -12,7 +12,8 @@
               <option>Etherium</option>
             </select>
             <label for="" class="form-label">Cantidad</label>
-            <input type="" class="form-control" v-model="Operacion.Cantidad">
+            <input type="number" class="form-control" :class="claseCantidadcomputada"
+                   v-model="Operacion.Cantidad">
             <label for="" class="form-label">Monto</label>
             <input type="" class="form-control" disabled v-model="Operacion.Monto" required>
             <label class="form-label">Movimiento</label>
@@ -40,6 +41,19 @@ export default {
         Movimiento: null,
       },
     };
+  },
+  computed: {
+    claseCantidadcomputada() {
+      let dato = '';
+      if (this.Operacion.Cantidad === null) {
+        dato = '';
+      } else if (this.Operacion.Cantidad === '') {
+        dato = 'is-invalid';
+      } else if (this.Operacion.Cantidad !== '') {
+        dato = 'is-valid';
+      }
+      return dato;
+    },
   },
 };
 </script>
