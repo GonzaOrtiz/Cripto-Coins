@@ -3,9 +3,12 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     loginCorrecto: 'GonzaloOrtiz',
-    accesoTotal: false,
+    accesoTotal: '',
   },
   mutations: {
+    VALIDAR_LOGIN(state,n) {
+      state.accesoTotal = n;
+    },
   },
   actions: {
   },

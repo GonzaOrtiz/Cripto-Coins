@@ -1,5 +1,6 @@
 <template>
   <div id="nav">
+    <h1>Comprar - Vender</h1>
     <div class="card mx-auto" style="width: 25rem;">
       <div class="card-body">
         <form>
@@ -60,5 +61,8 @@ export default {
 </script>
 
 <style scoped>
-
+h1 {
+  font-weight: bold;
+  color: white;
+}
 </style>

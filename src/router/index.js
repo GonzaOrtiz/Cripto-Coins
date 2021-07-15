@@ -3,6 +3,7 @@ import Home from '../views/Home.vue';
 import Menu from '../views/Menu.vue';
 import About from '../views/About.vue';
 import Operar from '../views/Operar.vue';
+import Historial from '../views/Historial.vue';
 
 const routes = [
   {
@@ -24,6 +25,16 @@ const routes = [
     path: '/operar',
     name: 'Operar',
     component: Operar,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+  },
+  {
+    path: '/historial',
+    name: 'Historial',
+    component: Historial,
   },
 ];
 

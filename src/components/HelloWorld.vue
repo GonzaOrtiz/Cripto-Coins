@@ -1,11 +1,12 @@
 <template>
   <div class="hello">
     <div id="nav">
+      <h1>Ingresar</h1>
       <div class="card mx-auto" style="width: 18rem;">
         <div class="card-body">
           <form>
             <div class="mb-3">
-              <label class="form-label">INGRESAR LOGIN</label>
+<!--              <label class="form-label">INGRESAR LOGIN</label>-->
               <input class="form-control"
                      :class="claseCantidadcomputada" aria-describedby="emailHelp"
                       v-model="login">
@@ -49,7 +50,8 @@ export default {
     comprobacionLogin() {
       if (this.login === this.$store.state.loginCorrecto) {
         alert('Login correcto bitch');
-        this.$store.state.accesoTotal = true;
+        this.$store.commit('VALIDAR_LOGIN',true);
+        // this.$store.state.loginCorrecto = 'Manolo';
       }
     },
   },
@@ -70,5 +72,9 @@ li {
 }
 a {
   color: #42b983;
+}
+h1 {
+  font-weight: bold;
+  color: white;
 }
 </style>

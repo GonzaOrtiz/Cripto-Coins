@@ -1,13 +1,28 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/menu">Menu</router-link> |
+    {{$store.state.accesoTotal}}
+    {{$store.state.loginCorrecto}}
+    <router-link to="/">Inicio</router-link> |
+    <router-link to="/menu" >Menu</router-link> |
     <router-link to="/operar">Operar</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/historial">Historial</router-link> |
+    <router-link to="/about">Autor</router-link>
+    <body >
+    </body>
   </div>
   <router-view/>
 </template>
+<script>
 
+export default {
+  name: 'App',
+  data() {
+    return {
+      valido: this.$store.state.accesoTotal,
+    };
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -23,10 +38,17 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: darkgoldenrod;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: white;
+}
+
+body {
+  background-color: #ffdd90;
+  background-image: url('./assets/bitcoin.jpg');
+  background-repeat: unset ;
+
 }
 </style>

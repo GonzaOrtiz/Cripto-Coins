@@ -1,9 +1,12 @@
 <template>
 <h1>Cripto-Valores</h1>
-  <div id="nav">
+  <div class="spinner-border text-warning" role="status" v-if="Dolar.length === 0">
+    <span class="sr-only"></span>
+  </div>
+  <div id="nav" v-if="Dolar.length !== 0">
     <div class="card mx-auto" style="width: 50rem;">
       <div class="card-body">
-        <table class="table table-hover">
+        <table class="table table-hover table-responsive">
           <thead>
           <tr>
             <th scope="col">Moneda</th>
@@ -13,7 +16,6 @@
             <th scope="col">ccl</th>
             <th scope="col">ccb</th>
             <th scope="col">blue</th>
-<!--            <th scope="col">Operar</th>-->
           </tr>
           </thead>
           <tbody>
@@ -90,7 +92,6 @@ export default {
     };
   },
   created() {
-    debugger;
     cryptoService.getApiDolar().then((result) => {
       console.log(result.data);
       this.Dolar = result.data;
@@ -112,5 +113,8 @@ export default {
 </script>
 
 <style scoped>
-
+h1 {
+  font-weight: bold;
+  color: white;
+}
 </style>
