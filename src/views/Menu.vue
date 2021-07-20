@@ -27,7 +27,6 @@
             <td>{{Dolar.ccl}}</td>
             <td>{{Dolar.ccb}}</td>
             <td>{{Dolar.blue}}</td>
-<!--            <td><a href="">Trading</a></td>-->
           </tr>
           </tbody>
         </table>
@@ -40,7 +39,6 @@
             <th scope="col">$Venta</th>
             <th scope="col">$Venta Final</th>
             <th scope="col">Hora</th>
-<!--            <th scope="col">Operar</th>-->
           </tr>
           </thead>
           <tbody>
@@ -50,8 +48,7 @@
             <td>{{Btc.totalAsk}}</td>
             <td>{{Btc.bid}}</td>
             <td>{{Btc.totalBid}}</td>
-            <td>{{Btc.time}}</td>
-<!--            <td><a href="">Trading</a></td>-->
+            <td>{{fechaHora(Btc.time)}}</td>
           </tr>
           <tr>
             <th scope="row">Usdc</th>
@@ -59,8 +56,7 @@
             <td>{{Usdc.totalAsk}}</td>
             <td>{{Usdc.bid}}</td>
             <td>{{Usdc.totalBid}}</td>
-            <td>{{Usdc.time}}</td>
-<!--            <td><a href="">Trading</a></td>-->
+            <td>{{fechaHora(Usdc.time)}}</td>
           </tr>
           <tr>
             <th scope="row">Etherium</th>
@@ -68,8 +64,7 @@
             <td>{{Eth.totalAsk}}</td>
             <td>{{Eth.bid}}</td>
             <td>{{Eth.totalBid}}</td>
-            <td>{{Eth.time}}</td>
-<!--            <td><a href="">Trading</a></td>-->
+            <td>{{fechaHora(Eth.time)}}</td>
           </tr>
           </tbody>
         </table>
@@ -89,6 +84,7 @@ export default {
       Btc: [],
       Usdc: [],
       Eth: [],
+      fecha: null,
     };
   },
   created() {
@@ -108,6 +104,12 @@ export default {
       console.log(result.data);
       this.Eth = result.data;
     });
+  },
+  methods: {
+    fechaHora(date) {
+      this.fecha = new Date(date * 1000);
+      return this.fecha.toLocaleString();
+    },
   },
 };
 </script>

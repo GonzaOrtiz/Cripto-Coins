@@ -1,7 +1,5 @@
 <template>
   <div id="nav">
-    {{$store.state.accesoTotal}}
-    {{$store.state.loginCorrecto}}
     <router-link to="/">Inicio</router-link> |
     <router-link to="/menu" >Menu</router-link> |
     <router-link to="/operar">Operar</router-link> |

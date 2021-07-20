@@ -50,7 +50,7 @@ export default {
     comprobacionLogin() {
       if (this.login === this.$store.state.loginCorrecto) {
         alert('Login correcto bitch');
-        this.$store.commit('VALIDAR_LOGIN',true);
+        this.$store.commit('VALIDAR_LOGIN', true);
         // this.$store.state.loginCorrecto = 'Manolo';
       }
     },
