@@ -4,6 +4,7 @@
     <router-link to="/menu" >Menu</router-link> |
     <router-link to="/operar">Operar</router-link> |
     <router-link to="/historial">Historial</router-link> |
+    <router-link to="/analisisdeestado">Estado</router-link> |
     <router-link to="/about">Autor</router-link>
     <body >
     </body>

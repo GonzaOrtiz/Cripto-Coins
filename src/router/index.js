@@ -4,6 +4,7 @@ import Menu from '../views/Menu.vue';
 import About from '../views/About.vue';
 import Operar from '../views/Operar.vue';
 import Historial from '../views/Historial.vue';
+import AnalisisDeEstado from '../views/AnalisisDeEstado.vue';
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
     path: '/historial',
     name: 'Historial',
     component: Historial,
+  },
+  {
+    path: '/analisisdeestado',
+    name: 'AnalisisDeEstado',
+    component: AnalisisDeEstado,
   },
 ];
 
