@@ -116,6 +116,7 @@ export default {
       BuyAndSellService.deleteApiBuyAndSell(id).then((result) => {
         console.log(result);
       });
+      alert('Eliminado Correctamente');
     },
     buscarParaEditarPorId(id) {
       console.log(id);
@@ -138,6 +139,7 @@ export default {
           console.log(response);
           if (response.status !== 201) {
             console.log('transacción Bien!');
+            alert('Editado correctamente');
           }
         })
         .catch((error) => {

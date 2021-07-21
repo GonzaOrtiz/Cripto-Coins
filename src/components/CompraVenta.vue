@@ -109,7 +109,7 @@ export default {
           console.log(error);
           this.errored = true;
         });
-      alert('todo ok');
+      alert('Transacción Realizada');
     },
     validarSelects() {
       if (this.Operacion.Criptomoneda === 'Bitcoin') {
