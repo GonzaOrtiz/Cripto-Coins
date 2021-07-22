@@ -1,41 +1,41 @@
 <template>
 <h1>Análisis de estado</h1>
-  <div class="card mx-auto" style="width: 60rem;" v-if="bitcoin.length >0">
-    <div class="card-body">
-      <table class="table table-hover table-responsive">
-        <thead>
-        <tr>
-          <th scope="col">Action</th>
-          <th scope="col">CryptoMoneda</th>
-          <th scope="col">Monto</th>
-          <th scope="col">Ars</th>
-          <th scope="col">Fecha</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="element in bitcoin" :key="element._id">
-          <td>{{ element.action }}</td>
-          <td>{{ element.crypto_code }}</td>
-          <td>{{ element.crypto_amount }}</td>
-          <td>{{ element.money}}</td>
-          <td>{{ element.datetime}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  {{bitcoinFilterComputed}}
+
+  <detalle-analisis-de-estado v-if="montoBitcoin !== null"
+                              cripto-name="Bitcoin"
+                              :cripto-number="montoBitcoin">
+
+  </detalle-analisis-de-estado>
+  <br>
+  <detalle-analisis-de-estado v-if="montoEtherium !== null"
+                              cripto-name="Etherium"
+                              :cripto-number="montoEtherium">
+
+  </detalle-analisis-de-estado>
+  <br>
+  <detalle-analisis-de-estado v-if="montoUsdc !== null"
+                              cripto-name="Usdc"
+                              :cripto-number="montoUsdc">
+
+  </detalle-analisis-de-estado>
+  <h1>{{FilterComputed}}</h1>
 </template>
 
 <script>
 import BuyAndSellService from '../services/BuyAndSellService';
+import DetalleAnalisisDeEstado from '../components/DetalleAnalisisDeEstado.vue';
 
 export default {
   name: 'AnalisisDeEstado',
+  components: {
+    DetalleAnalisisDeEstado,
+  },
   data() {
     return {
       BuyAndSell: [],
-      bitcoin: [],
+      montoBitcoin: null,
+      montoEtherium: null,
+      montoUsdc: null,
     };
   },
   created() {
@@ -45,14 +45,47 @@ export default {
     });
   },
   methods: {
-    bitcoinFilter() {
-      this.bitcoin = this.BuyAndSell.filter((accion) => accion.crypto_code === 'Bitcoin');
-      console.log(this.bitcoin);
+    Filter() {
+      for (let i = 0; i < this.BuyAndSell.length; i += 1) {
+        if (this.BuyAndSell[i].crypto_code === 'Bitcoin') {
+          let sumar;
+          if (this.BuyAndSell[i].action === 'purchase') {
+            sumar = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.montoBitcoin += sumar;
+          } else if (this.BuyAndSell[i].action === 'sale') {
+            sumar = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.montoBitcoin -= sumar;
+          }
+        }
+        if (this.BuyAndSell[i].crypto_code === 'Etherium') {
+          let sumar;
+          if (this.BuyAndSell[i].action === 'purchase') {
+            sumar = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.montoEtherium += sumar;
+          } else if (this.BuyAndSell[i].action === 'sale') {
+            sumar = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.montoEtherium -= sumar;
+          }
+        }
+        if (this.BuyAndSell[i].crypto_code === 'Usdc') {
+          let sumar;
+          if (this.BuyAndSell[i].action === 'purchase') {
+            sumar = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.montoUsdc += sumar;
+          } else if (this.BuyAndSell[i].action === 'sale') {
+            sumar = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.montoUsdc -= sumar;
+          }
+        }
+      }
+      console.log(this.montoBitcoin);
+      console.log(this.montoEtherium);
+      console.log(this.montoUsdc);
     },
   },
   computed: {
-    bitcoinFilterComputed() {
-      return this.bitcoinFilter();
+    FilterComputed() {
+      return this.Filter();
     },
   },
 };
@@ -64,3 +97,88 @@ h1 {
   color: white;
 }
 </style>
+
+<!--export default {-->
+<!--name: 'StateAnalysis.vue',-->
+<!--data() {-->
+<!--return {-->
+<!--currencyBuyAndSell: [],-->
+<!--amountBtc: null,-->
+<!--amountEth: null,-->
+<!--amountBch: null,-->
+<!--amountUsdc: null,-->
+<!--amountXrp: null,-->
+<!--};-->
+<!--},-->
+<!--created() {-->
+<!--ApiClient.getBuyAndSell().then((response) => {-->
+<!--this.currencyBuyAndSell = response.data;-->
+<!--})-->
+<!--.catch((error) => {-->
+<!--console.log(error);-->
+<!--this.errored = true;-->
+<!--});-->
+<!--},-->
+<!--computed: {-->
+<!--list() {-->
+<!--return this.listCurrencies();-->
+<!--},-->
+<!--},-->
+<!--methods: {-->
+<!--listCurrencies() {-->
+<!--for (let i = 0; i < this.currencyBuyAndSell.length; i += 1) {-->
+<!--if (this.currencyBuyAndSell[i].crypto_code === 'bitcoin') {-->
+<!--let sum;-->
+<!--if (this.currencyBuyAndSell[i].action === 'purchase') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountBtc += sum;-->
+<!--} else if (this.currencyBuyAndSell[i].action === 'sale') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountBtc -= sum;-->
+<!--}-->
+<!--}-->
+<!--if (this.currencyBuyAndSell[i].crypto_code === 'ethereum') {-->
+<!--let sum;-->
+<!--if (this.currencyBuyAndSell[i].action === 'purchase') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountEth += sum;-->
+<!--} else if (this.currencyBuyAndSell[i].action === 'sale') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountEth -= sum;-->
+<!--}-->
+<!--}-->
+<!--if (this.currencyBuyAndSell[i].crypto_code === 'bch') {-->
+<!--let sum;-->
+<!--if (this.currencyBuyAndSell[i].action === 'purchase') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountBch += sum;-->
+<!--} else if (this.currencyBuyAndSell[i].action === 'sale') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountBch -= sum;-->
+<!--}-->
+<!--}-->
+<!--if (this.currencyBuyAndSell[i].crypto_code === 'usdc') {-->
+<!--let sum;-->
+<!--if (this.currencyBuyAndSell[i].action === 'purchase') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountUsdc += sum;-->
+<!--} else if (this.currencyBuyAndSell[i].action === 'sale') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountUsdc -= sum;-->
+<!--}-->
+<!--}-->
+<!--if (this.currencyBuyAndSell[i].crypto_code === 'xrp') {-->
+<!--let sum;-->
+<!--if (this.currencyBuyAndSell[i].action === 'purchase') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountXrp += sum;-->
+<!--} else if (this.currencyBuyAndSell[i].action === 'sale') {-->
+<!--sum = Number.parseFloat(this.currencyBuyAndSell[i].crypto_amount);-->
+<!--this.amountXrp -= sum;-->
+<!--}-->
+<!--}-->
+<!--}-->
+<!--},-->
+<!--},-->
+<!--};-->
+<!--</script>-->

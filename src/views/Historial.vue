@@ -147,6 +147,10 @@ export default {
           this.errored = true;
         });
     },
+    fechaHora(date) {
+      this.fecha = new Date(date * 1000);
+      return this.fecha.toLocaleString();
+    },
   },
 };
 </script>
