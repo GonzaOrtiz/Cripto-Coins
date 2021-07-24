@@ -126,9 +126,11 @@ export default {
           this.valorCriptoUnidad = this.EthSelected.totalBid;
         }
       } else if (this.Operacion.Criptomoneda === 'Usdc') {
-        this.valorCriptoUnidad = this.UsdcSelected.totalAsk;
-      } else if (this.Operacion.Movimiento === 'Vender') {
-        this.valorCriptoUnidad = this.UsdcSelected.totalBid;
+        if (this.Operacion.Movimiento === 'Comprar') {
+          this.valorCriptoUnidad = this.UsdcSelected.totalAsk;
+        } else if (this.Operacion.Movimiento === 'Vender') {
+          this.valorCriptoUnidad = this.UsdcSelected.totalBid;
+        }
       }
       this.Operacion.CriptomonedaTotal = (this.Operacion.Cantidad
         * this.valorCriptoUnidad).toFixed(2);
