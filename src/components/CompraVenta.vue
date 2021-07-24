@@ -25,12 +25,13 @@
                    disabled v-model="valorCriptoUnidad">
             <label class="form-label">$Monto ars  total</label>
             <input type="" class="form-control" disabled v-model="Operacion.CriptomonedaTotal">
-      </div>
+          </div>
           <button type="submit" class="btn btn-primary">Aceptar</button>
         </form>
       </div>
     </div>
   </div>
+  {{valorCriptoUnidad}}
 </template>
 <script>
 import cryptoService from '../services/cryptoService';
@@ -118,15 +119,13 @@ export default {
         } else if (this.Operacion.Movimiento === 'Vender') {
           this.valorCriptoUnidad = this.BitcoinSelected.totalBid;
         }
-      }
-      if (this.Operacion.Criptomoneda === 'Etherium') {
+      } else if (this.Operacion.Criptomoneda === 'Etherium') {
         if (this.Operacion.Movimiento === 'Comprar') {
           this.valorCriptoUnidad = this.EthSelected.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
           this.valorCriptoUnidad = this.EthSelected.totalBid;
         }
-      }
-      if (this.Operacion.Criptomoneda === 'Usdc') {
+      } else if (this.Operacion.Criptomoneda === 'Usdc') {
         this.valorCriptoUnidad = this.UsdcSelected.totalAsk;
       } else if (this.Operacion.Movimiento === 'Vender') {
         this.valorCriptoUnidad = this.UsdcSelected.totalBid;

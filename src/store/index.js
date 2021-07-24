@@ -14,15 +14,28 @@ export default createStore({
     VALIDAR_LOGIN(state, n) {
       state.accesoTotal = n;
     },
-    // pullDolar(state) {
-    //   cryptoService.getApiDolar()
-    //     .then((response) => (state.GlobalDolar = response.data))
-    //     .catch((error) => console.error(error));
-    // },
-    //ver
+    pullApiBtc(state) {
+      cryptoService.getApiBtc()
+        .then((result) => {
+          console.log(result.data);
+          state.GlobalBtc = result.data;
+        });
+    },
   },
   actions: {
   },
   modules: {
   },
 });
+// cryptoService.getApiBtc().then((result) => {
+//   console.log(result.data);
+//   this.Btc = result.data;
+// });
+// cryptoService.getApiUsdc().then((result) => {
+//   console.log(result.data);
+//   this.Usdc = result.data;
+// });
+// cryptoService.getApiEth().then((result) => {
+//   console.log(result.data);
+//   this.Eth = result.data;
+// });

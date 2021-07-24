@@ -5,6 +5,7 @@ import About from '../views/About.vue';
 import Operar from '../views/Operar.vue';
 import Historial from '../views/Historial.vue';
 import AnalisisDeEstado from '../views/AnalisisDeEstado.vue';
+import Inversiones from '../views/Inversiones.vue';
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: '/analisisdeestado',
     name: 'AnalisisDeEstado',
     component: AnalisisDeEstado,
+  },
+  {
+    path: '/inversiones',
+    name: 'Inversiones',
+    component: Inversiones,
   },
 ];
 

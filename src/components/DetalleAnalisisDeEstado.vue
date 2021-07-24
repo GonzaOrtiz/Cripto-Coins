@@ -1,18 +1,42 @@
 <template>
-  <div class="card mx-auto" style="width: 18rem;">
+  <div class="card mx-auto" style="width: 22rem;">
     <div class="card-body">
       <table class="table table-hover table-responsive">
         <thead>
         <tr>
           <th scope="col">Cripto Moneda</th>
-          <th scope="col">Monto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Total</th>
         </tr>
         </thead>
         <tbody>
         <tr >
-          <td >{{ criptoName }}</td>
-          <td style="color:#FF0000" v-if="criptoNumber < 0">{{ criptoNumber }} </td>
-          <td style="color:#2ed016" v-if="criptoNumber > 0">{{ criptoNumber }} </td>
+          <td >{{ criptoNameBitcoin }}</td>
+          <td style="color:#FF0000" v-if="criptoNumberBitcoin < 0">{{ criptoNumberBitcoin }} </td>
+          <td  v-if="criptoNumberBitcoin === 0">{{ criptoNumberBitcoin }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberBitcoin > 0">{{ criptoNumberBitcoin }} </td>
+          <td >${{ criptoTotalBitcoin.toFixed(2) }}</td>
+        </tr>
+        <tr >
+          <td >{{ criptoNameEth }}</td>
+          <td style="color:#FF0000" v-if="criptoNumberEth < 0">{{ criptoNumberEth }} </td>
+          <td  v-if="criptoNumberEth === 0">{{ criptoNumberEth }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberEth > 0">{{ criptoNumberEth }} </td>
+          <td >${{ criptoTotalEth.toFixed(2) }}</td>
+        </tr>
+        <tr >
+          <td >{{ criptoNameUsdc }}</td>
+          <td style="color:#FF0000" v-if="criptoNumberUsdc < 0">{{ criptoNumberUsdc }} </td>
+          <td  v-if="criptoNumberUsdc === 0">{{ criptoNumberUsdc }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberUsdc > 0">{{ criptoTotalUsdc }} </td>
+          <td >${{ criptoTotalUsdc.toFixed(2) }}</td>
+        </tr>
+        <tr >
+          <td >TOTAL</td>
+          <td style="color:#FF0000" v-if="criptoNumberEth < 0"> </td>
+          <td style="color:#2ed016" v-if="criptoNumberEth > 0"> </td>
+          <td v-if="criptoNumberEth === 0"> </td>
+          <td >${{ (criptoTotalBitcoin + criptoTotalEth + criptoTotalUsdc).toFixed(2) }}</td>
         </tr>
         </tbody>
       </table>
@@ -24,11 +48,39 @@
 export default {
   name: 'DetalleAnalisisDeEstado',
   props: {
-    criptoName: {
+    criptoNameBitcoin: {
       type: String,
       required: true,
     },
-    criptoNumber: {
+    criptoNumberBitcoin: {
+      type: Number,
+      required: true,
+    },
+    criptoTotalBitcoin: {
+      type: Number,
+      required: true,
+    },
+    criptoNameEth: {
+      type: String,
+      required: true,
+    },
+    criptoNumberEth: {
+      type: Number,
+      required: true,
+    },
+    criptoTotalEth: {
+      type: Number,
+      required: true,
+    },
+    criptoNameUsdc: {
+      type: String,
+      required: true,
+    },
+    criptoNumberUsdc: {
+      type: Number,
+      required: true,
+    },
+    criptoTotalUsdc: {
       type: Number,
       required: true,
     },
