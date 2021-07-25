@@ -88,9 +88,7 @@ export default {
           }
         }
       }
-      // console.log(this.montoBitcoin);
-      // this.montoArsBtc = parseFloat(this.montoBitcoin * this.BitcoinSelected.totalBid);
-      console.log(this.montoArsBtc);
+      console.log(this.montoBitcoin);
       console.log(this.montoEtherium);
       console.log(this.montoUsdc);
     },

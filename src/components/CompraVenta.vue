@@ -32,6 +32,7 @@
     </div>
   </div>
   {{valorCriptoUnidad}}
+  {{claseCantidadcomputada}}
 </template>
 <script>
 import cryptoService from '../services/cryptoService';

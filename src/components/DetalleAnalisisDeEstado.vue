@@ -12,14 +12,16 @@
         <tbody>
         <tr >
           <td >{{ criptoNameBitcoin }}</td>
-          <td style="color:#FF0000" v-if="criptoNumberBitcoin < 0">{{ criptoNumberBitcoin }} </td>
-          <td  v-if="criptoNumberBitcoin === 0">{{ criptoNumberBitcoin }} </td>
-          <td style="color:#2ed016" v-if="criptoNumberBitcoin > 0">{{ criptoNumberBitcoin }} </td>
+          <td style="color:#FF0000" v-if="criptoNumberBitcoin < 0">
+            {{ criptoNumberBitcoin.toFixed(2) }} </td>
+          <td  v-if="criptoNumberBitcoin === 0">{{ criptoNumberBitcoin.toFixed(2) }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberBitcoin > 0">
+            {{ criptoNumberBitcoin.toFixed(2) }} </td>
           <td >${{ criptoTotalBitcoin.toFixed(2) }}</td>
         </tr>
         <tr >
           <td >{{ criptoNameEth }}</td>
-          <td style="color:#FF0000" v-if="criptoNumberEth < 0">{{ criptoNumberEth }} </td>
+          <td style="color:#FF0000" v-if="criptoNumberEth < 0">{{criptoNumberEth.toFixed(2) }} </td>
           <td  v-if="criptoNumberEth === 0">{{ criptoNumberEth }} </td>
           <td style="color:#2ed016" v-if="criptoNumberEth > 0">{{ criptoNumberEth }} </td>
           <td >${{ criptoTotalEth.toFixed(2) }}</td>
@@ -28,7 +30,7 @@
           <td >{{ criptoNameUsdc }}</td>
           <td style="color:#FF0000" v-if="criptoNumberUsdc < 0">{{ criptoNumberUsdc }} </td>
           <td  v-if="criptoNumberUsdc === 0">{{ criptoNumberUsdc }} </td>
-          <td style="color:#2ed016" v-if="criptoNumberUsdc > 0">{{ criptoTotalUsdc }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberUsdc > 0">{{ criptoNumberUsdc }} </td>
           <td >${{ criptoTotalUsdc.toFixed(2) }}</td>
         </tr>
         <tr >
