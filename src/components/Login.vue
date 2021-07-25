@@ -4,9 +4,7 @@
       <h1>Ingresar</h1>
       <div class="card mx-auto" style="width: 18rem;">
         <div class="card-body">
-          <form>
             <div class="mb-3">
-<!--              <label class="form-label">INGRESAR LOGIN</label>-->
               <input class="form-control"
                      :class="claseCantidadcomputada" aria-describedby="emailHelp"
                       v-model="login">
@@ -14,7 +12,6 @@
             </div>
             <button type="submit" class="btn btn-primary"
                     v-on:click="comprobacionLogin">Aceptar</button>
-          </form>
         </div>
       </div>
     </div>
@@ -24,10 +21,7 @@
 <script>
 
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String,
-  },
+  name: 'Login',
   data() {
     return {
       login: null,
@@ -50,8 +44,7 @@ export default {
     comprobacionLogin() {
       if (this.login === this.$store.state.loginCorrecto) {
         alert('Login correcto bitch');
-        this.$store.commit('VALIDAR_LOGIN', true);
-        // this.$store.state.loginCorrecto = 'Manolo';
+        this.$store.commit('LOGIN_MODIFICAR', true);
       }
     },
   },

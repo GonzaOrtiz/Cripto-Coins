@@ -22,15 +22,18 @@
         <tr >
           <td >{{ criptoNameEth }}</td>
           <td style="color:#FF0000" v-if="criptoNumberEth < 0">{{criptoNumberEth.toFixed(2) }} </td>
-          <td  v-if="criptoNumberEth === 0">{{ criptoNumberEth }} </td>
-          <td style="color:#2ed016" v-if="criptoNumberEth > 0">{{ criptoNumberEth }} </td>
+          <td  v-if="criptoNumberEth === 0">{{ criptoNumberEth.toFixed(2) }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberEth > 0">
+            {{ criptoNumberEth.toFixed(2) }} </td>
           <td >${{ criptoTotalEth.toFixed(2) }}</td>
         </tr>
         <tr >
           <td >{{ criptoNameUsdc }}</td>
-          <td style="color:#FF0000" v-if="criptoNumberUsdc < 0">{{ criptoNumberUsdc }} </td>
-          <td  v-if="criptoNumberUsdc === 0">{{ criptoNumberUsdc }} </td>
-          <td style="color:#2ed016" v-if="criptoNumberUsdc > 0">{{ criptoNumberUsdc }} </td>
+          <td style="color:#FF0000" v-if="criptoNumberUsdc < 0">
+            {{ criptoNumberUsdc.toFixed(2) }} </td>
+          <td  v-if="criptoNumberUsdc === 0">{{ criptoNumberUsdc.toFixed(2) }} </td>
+          <td style="color:#2ed016" v-if="criptoNumberUsdc > 0">
+            {{ criptoNumberUsdc.toFixed(2)}} </td>
           <td >${{ criptoTotalUsdc.toFixed(2) }}</td>
         </tr>
         <tr >

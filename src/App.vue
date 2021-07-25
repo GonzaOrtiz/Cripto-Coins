@@ -1,11 +1,19 @@
 <template>
-  <div id="nav">
+  <div id="nav" v-if="$store.state.accesoTotal">
     <router-link to="/">Inicio</router-link> |
     <router-link to="/menu" >Menu</router-link> |
-    <router-link to="/operar">Operar</router-link> |
+    <router-link to="/operar">Operar</router-link>|
     <router-link to="/historial">Historial</router-link> |
     <router-link to="/analisisdeestado">Estado</router-link> |
     <router-link to="/inversiones">Inversiones</router-link> |
+    <router-link to="/about">Autor</router-link>
+    <body >
+    </body>
+    <h1>Bienvenido Gonzalo</h1>
+  </div>
+  <div id="nav2" v-if="!$store.state.accesoTotal">
+    <router-link to="/">Inicio</router-link> |
+    <router-link to="/menu" >Menu</router-link> |
     <router-link to="/about">Autor</router-link>
     <body >
     </body>
@@ -50,5 +58,23 @@ body {
   background-image: url('./assets/bitcoin.jpg');
   background-repeat: unset ;
 
+}
+#nav2 {
+  padding: 30px;
+}
+
+#nav2 a {
+  font-weight: bold;
+  color: darkgoldenrod;
+}
+
+#nav2 a.router-link-exact-active {
+  color: white;
+}
+</style>
+<style scoped>
+h1 {
+  font-weight: bold;
+  color: white;
 }
 </style>
