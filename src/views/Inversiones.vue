@@ -18,20 +18,21 @@
         </tr>
         <tr>
           <td>Ethereum</td>
-          <td>{{DifMoneyEthereum.toFixed(2)}}</td>
+          <td style="color:#FF0000" v-if="totalEthereum < 0">{{totalEthereum.toFixed(2)}}</td>
+          <td style="color:#2ed016" v-if="totalEthereum > 0">{{totalEthereum.toFixed(2)}}</td>
+          <td v-if="totalEthereum === 0">{{totalEthereum.toFixed(2)}}</td>
         </tr>
         <tr>
           <td>Usdc</td>
-          <td>{{moneyUsdc.toFixed(2)}}</td>
+          <td style="color:#FF0000" v-if="totalUsdc < 0">{{totalUsdc.toFixed(2)}}</td>
+          <td style="color:#2ed016" v-if="totalUsdc > 0">{{totalUsdc.toFixed(2)}}</td>
+          <td v-if="totalUsdc === 0">{{totalUsdc.toFixed(2)}}</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
   <span>{{FilterComputed}}</span>
-  <h1>saldo comprado bitcion {{saldoCompradoBitcoin}}</h1>
-  <h1>saldo actual comprado bitcion {{saldoActualBitcoinMoney}}</h1>
-  <h1> Resultado bit{{resultadoBitcoin}}</h1>
 </template>
 
 <script>
@@ -52,15 +53,28 @@ export default {
       moneyBitcoin: 0,
       moneyEthereum: 0,
       moneyUsdc: 0,
-      montoBitcoin: 0,
-      montoUsdc: 0,
-      montoEthereum: 0,
       moneyBitcoinComprado: 0,
+      moneyEthereumComprado: 0,
+      moneyUsdcomprado: 0,
+      DifMoneyUsdc: 0,
       cantidadBitcoinComprado: 0,
+      cantidadEthereumComprado: 0,
+      cantidadUsdcComprado: 0,
       saldoCompradoBitcoin: 0,
+      saldoCompradoEthereum: 0,
+      saldoCompradoUsdc: 0,
       resultadoBitcoin: 0,
+      resultadoEthereum: 0,
+      resultadoUsdc: 0,
       totalBitcoin: 0,
+      totalEthereum: 0,
+      totalUsdc: 0,
       saldoActualBitcoinMoney: 0,
+      saldoActualEthereumMoney: 0,
+      saldoActualUsdcMoney: 0,
+      cantidadUsdcVendido: 0,
+      cantidadEthereumVendido: 0,
+      cantidadBitcoinVendido: 0,
     };
   },
   created() {
@@ -96,35 +110,70 @@ export default {
           } else if (this.BuyAndSell[i].action === 'sale') {
             sumar = Number.parseFloat(this.BuyAndSell[i].money);
             this.DifmoneyBitcoin += sumar;
+            monto = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.cantidadBitcoinVendido += monto;
           }
         }
         if (this.BuyAndSell[i].crypto_code === 'Etherium') {
           let sumar;
-          // let monto;
+          let monto;
           if (this.BuyAndSell[i].action === 'purchase') {
             sumar = Number.parseFloat(this.BuyAndSell[i].money);
             this.DifMoneyEthereum -= sumar;
+            monto = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.cantidadEthereumComprado += monto;
+            this.moneyEthereumComprado += sumar;
           } else if (this.BuyAndSell[i].action === 'sale') {
             sumar = Number.parseFloat(this.BuyAndSell[i].money);
             this.DifMoneyEthereum += sumar;
+            monto = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.cantidadEthereumVendido += monto;
           }
         }
         if (this.BuyAndSell[i].crypto_code === 'Usdc') {
           let sumar;
+          let monto;
           if (this.BuyAndSell[i].action === 'purchase') {
             sumar = Number.parseFloat(this.BuyAndSell[i].money);
-            this.moneyUsdc -= sumar;
+            this.DifMoneyUsdc -= sumar;
+            monto = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.cantidadUsdcComprado += monto;
+            this.moneyUsdcomprado += sumar;
           } else if (this.BuyAndSell[i].action === 'sale') {
             sumar = Number.parseFloat(this.BuyAndSell[i].money);
-            this.moneyUsdc += sumar;
+            this.DifMoneyUsdc += sumar;
+            monto = Number.parseFloat(this.BuyAndSell[i].crypto_amount);
+            this.cantidadUsdcVendido += monto;
           }
         }
       }
-      // Calculos Bitcoin
-      this.saldoCompradoBitcoin = this.cantidadBitcoinComprado * this.moneyBitcoinComprado;
-      this.saldoActualBitcoinMoney = this.BitcoinSelected.totalBid * this.cantidadBitcoinComprado;
-      this.resultadoBitcoin = this.saldoActualBitcoinMoney - this.saldoCompradoBitcoin;
-      this.totalBitcoin = this.resultadoBitcoin + this.DifmoneyBitcoin;
+      // Calculos BITCOIN
+      if ((this.cantidadBitcoinVendido - this.cantidadBitcoinComprado) !== 0) {
+        this.saldoCompradoBitcoin = this.cantidadBitcoinComprado * this.moneyBitcoinComprado;
+        this.saldoActualBitcoinMoney = this.BitcoinSelected.totalBid * this.cantidadBitcoinComprado;
+        this.resultadoBitcoin = this.saldoActualBitcoinMoney - this.saldoCompradoBitcoin;
+        this.totalBitcoin = this.resultadoBitcoin + this.DifmoneyBitcoin;
+      } else {
+        this.totalBitcoin = this.DifmoneyBitcoin;
+      }
+      // Calculos ETHEREUM
+      if ((this.cantidadEthereumVendido - this.cantidadEthereumComprado) !== 0) {
+        this.saldoCompradoEthereum = this.cantidadEthereumComprado * this.moneyEthereumComprado;
+        this.saldoActualEthereumMoney = this.EthSelected.totalBid * this.cantidadEthereumComprado;
+        this.resultadoEthereum = this.saldoActualEthereumMoney - this.saldoCompradoEthereum;
+        this.totalEthereum = this.resultadoEthereum + this.DifMoneyEthereum;
+      } else {
+        this.totalEthereum = this.DifMoneyEthereum;
+      }
+      // Calculos USDC
+      if ((this.cantidadUsdcVendido - this.cantidadUsdcVendido) !== 0) {
+        this.saldoCompradoUsdc = this.cantidadUsdcComprado * this.moneyUsdcomprado;
+        this.saldoActualUsdcMoney = this.UsdcSelected.totalBid * this.cantidadUsdcComprado;
+        this.resultadoUsdc = this.saldoActualUsdcMoney - this.saldoCompradoUsdc;
+        this.totalUsdc = this.resultadoUsdc + this.DifMoneyUsdc;
+      } else {
+        this.totalUsdc = this.DifMoneyUsdc;
+      }
     },
   },
   computed: {
