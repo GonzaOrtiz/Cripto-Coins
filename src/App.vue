@@ -5,14 +5,14 @@
     <router-link to="/historial">Historial</router-link> |
     <router-link to="/analisisdeestado">Estado</router-link> |
     <router-link to="/inversiones">Inversiones</router-link> |
-    <router-link to="/about">Autor</router-link>
+    <router-link to="/autor">Autor</router-link>
     <body >
     </body>
   </div>
   <div id="nav2" v-if="!$store.state.accesoTotal">
     <router-link to="/">Inicio</router-link> |
     <router-link to="/menu" >Menu</router-link> |
-    <router-link to="/about">Autor</router-link>
+    <router-link to="/autor">Autor</router-link>
     <body >
     </body>
   </div>

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Menu from '../views/Menu.vue';
-import About from '../views/About.vue';
+import Autor from '../views/Autor.vue';
 import Operar from '../views/Operar.vue';
 import Historial from '../views/Historial.vue';
 import AnalisisDeEstado from '../views/AnalisisDeEstado.vue';
@@ -13,11 +13,11 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/about',
-    name: 'About',
-    component: About,
-  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: About,
+  // },
   {
     path: '/menu',
     name: 'Menu',
@@ -29,9 +29,9 @@ const routes = [
     component: Operar,
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About,
+    path: '/autor',
+    name: 'Autor',
+    component: Autor,
   },
   {
     path: '/historial',

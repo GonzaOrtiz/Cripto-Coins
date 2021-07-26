@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="autor">
     <h1>Alumno: Gonzalo Ortiz</h1>
   </div>
 </template>
