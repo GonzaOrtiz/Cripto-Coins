@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" v-if="$store.state.accesoTotal">
+  <div id="nav" v-if="!$store.state.accesoTotal">
     <router-link to="/">Inicio</router-link> |
     <router-link to="/menu" >Menu</router-link> |
     <router-link to="/operar">Operar</router-link>|
@@ -9,17 +9,18 @@
     <router-link to="/about">Autor</router-link>
     <body >
     </body>
-    <h1>Bienvenido Gonzalo</h1>
   </div>
-  <div id="nav2" v-if="!$store.state.accesoTotal">
+  <div id="nav2" v-if="$store.state.accesoTotal">
     <router-link to="/">Inicio</router-link> |
     <router-link to="/menu" >Menu</router-link> |
     <router-link to="/about">Autor</router-link>
+    <router-link to="/probandoArray">Array</router-link>
     <body >
     </body>
   </div>
   <router-view/>
 </template>
+
 <script>
 
 export default {
@@ -28,6 +29,12 @@ export default {
     return {
       valido: this.$store.state.accesoTotal,
     };
+  },
+  beforeCreate() {
+    this.$store.commit('pullCriptoBitcoin');
+    this.$store.commit('pullCriptoEthereum');
+    this.$store.commit('pullCriptoUsdc');
+    this.$store.commit('pullDolar');
   },
 };
 </script>

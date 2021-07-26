@@ -6,12 +6,18 @@ import Operar from '../views/Operar.vue';
 import Historial from '../views/Historial.vue';
 import AnalisisDeEstado from '../views/AnalisisDeEstado.vue';
 import Inversiones from '../views/Inversiones.vue';
+import probandoArray from '../views/probandoArray.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/probandoArray',
+    name: 'probandoArray',
+    component: probandoArray,
   },
   {
     path: '/about',

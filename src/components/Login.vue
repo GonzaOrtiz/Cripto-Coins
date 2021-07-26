@@ -1,8 +1,9 @@
 <template>
   <div class="hello">
     <div id="nav">
-      <h1>Ingresar</h1>
-      <div class="card mx-auto" style="width: 18rem;">
+      <h1 v-if="bienvenido">Bienvenido Gonzalo</h1>
+      <h1 v-if="!bienvenido">Ingresar</h1>
+      <div class="card mx-auto" style="width: 18rem;" v-if="!bienvenido">
         <div class="card-body">
             <div class="mb-3">
               <input class="form-control"
@@ -25,6 +26,7 @@ export default {
   data() {
     return {
       login: null,
+      bienvenido: false,
     };
   },
   computed: {
@@ -43,8 +45,8 @@ export default {
   methods: {
     comprobacionLogin() {
       if (this.login === this.$store.state.loginCorrecto) {
-        alert('Login correcto bitch');
         this.$store.commit('LOGIN_MODIFICAR', true);
+        this.bienvenido = true;
       }
     },
   },
@@ -66,6 +68,12 @@ li {
 a {
   color: #42b983;
 }
+h1 {
+  font-weight: bold;
+  color: white;
+}
+</style>
+<style scoped>
 h1 {
   font-weight: bold;
   color: white;

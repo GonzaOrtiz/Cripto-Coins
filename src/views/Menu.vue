@@ -1,9 +1,10 @@
 <template>
 <h1>Cripto-Valores</h1>
-  <div class="spinner-border text-warning" role="status" v-if="Dolar.length === 0">
+  <div class="spinner-border text-warning" role="status"
+       v-if="$store.state.dolarStore.length === 0">
     <span class="sr-only"></span>
   </div>
-  <div id="nav" v-if="Dolar.length !== 0">
+  <div id="nav" v-if="$store.state.dolarStore.length !== 0">
     <div class="card mx-auto" style="width: 50rem;">
       <div class="card-body">
         <table class="table table-hover table-responsive">
@@ -21,12 +22,12 @@
           <tbody>
             <tr>
             <th scope="row">Dolar</th>
-            <td>{{ Dolar.oficial }}</td>
-            <td>{{Dolar.solidario}}</td>
-            <td>{{Dolar.mep}}</td>
-            <td>{{Dolar.ccl}}</td>
-            <td>{{Dolar.ccb}}</td>
-            <td>{{Dolar.blue}}</td>
+            <td>{{ $store.state.dolarStore.oficial }}</td>
+            <td>{{$store.state.dolarStore.solidario}}</td>
+            <td>{{$store.state.dolarStore.mep}}</td>
+            <td>{{$store.state.dolarStore.ccl}}</td>
+            <td>{{$store.state.dolarStore.ccb}}</td>
+            <td>{{$store.state.dolarStore.blue}}</td>
           </tr>
           </tbody>
         </table>
@@ -44,27 +45,27 @@
           <tbody>
           <tr>
             <th scope="row">Bitcoin</th>
-            <td>{{ Btc.ask }}</td>
-            <td>{{Btc.totalAsk}}</td>
-            <td>{{Btc.bid}}</td>
-            <td>{{Btc.totalBid}}</td>
-            <td>{{fechaHora(Btc.time)}}</td>
+            <td>{{ $store.state.bitcoinStore.ask.toFixed(2) }}</td>
+            <td>{{$store.state.bitcoinStore.totalAsk.toFixed(2)}}</td>
+            <td>{{$store.state.bitcoinStore.bid.toFixed(2)}}</td>
+            <td>{{$store.state.bitcoinStore.totalBid.toFixed(2)}}</td>
+            <td>{{fechaHora($store.state.bitcoinStore.time)}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Ethereum</th>
+            <td>{{ $store.state.ethereumStore.ask.toFixed(2) }}</td>
+            <td>{{$store.state.ethereumStore.totalAsk.toFixed(2)}}</td>
+            <td>{{$store.state.ethereumStore.bid.toFixed(2)}}</td>
+            <td>{{$store.state.ethereumStore.totalBid.toFixed(2)}}</td>
+            <td>{{fechaHora($store.state.ethereumStore.time)}}</td>
           </tr>
           <tr>
             <th scope="row">Usdc</th>
-            <td>{{ Usdc.ask }}</td>
-            <td>{{Usdc.totalAsk}}</td>
-            <td>{{Usdc.bid}}</td>
-            <td>{{Usdc.totalBid}}</td>
-            <td>{{fechaHora(Usdc.time)}}</td>
-          </tr>
-          <tr>
-            <th scope="row">Etherium</th>
-            <td>{{ Eth.ask }}</td>
-            <td>{{Eth.totalAsk}}</td>
-            <td>{{Eth.bid}}</td>
-            <td>{{Eth.totalBid}}</td>
-            <td>{{fechaHora(Eth.time)}}</td>
+            <td>{{ $store.state.usdcStore.ask.toFixed(2) }}</td>
+            <td>{{$store.state.usdcStore.totalAsk.toFixed(2)}}</td>
+            <td>{{$store.state.usdcStore.bid.toFixed(2)}}</td>
+            <td>{{$store.state.usdcStore.totalBid.toFixed(2)}}</td>
+            <td>{{fechaHora($store.state.usdcStore.time)}}</td>
           </tr>
           </tbody>
         </table>
@@ -74,36 +75,13 @@
 </template>
 
 <script>
-import cryptoService from '../services/cryptoService';
 
 export default {
   name: 'Menu',
   data() {
     return {
-      Dolar: [],
-      Btc: [],
-      Usdc: [],
-      Eth: [],
       fecha: null,
     };
-  },
-  created() {
-    cryptoService.getApiDolar().then((result) => {
-      console.log(result.data);
-      this.Dolar = result.data;
-    });
-    cryptoService.getApiBtc().then((result) => {
-      console.log(result.data);
-      this.Btc = result.data;
-    });
-    cryptoService.getApiUsdc().then((result) => {
-      console.log(result.data);
-      this.Usdc = result.data;
-    });
-    cryptoService.getApiEth().then((result) => {
-      console.log(result.data);
-      this.Eth = result.data;
-    });
   },
   methods: {
     fechaHora(date) {

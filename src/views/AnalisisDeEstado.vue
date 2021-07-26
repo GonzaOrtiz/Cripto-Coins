@@ -2,14 +2,17 @@
 <h1>Análisis del estado actual</h1>
   <detalle-analisis-de-estado v-if="montoBitcoin !== null"
                               cripto-name-bitcoin="Bitcoin"
-                              :cripto-total-bitcoin="(BitcoinSelected.totalBid * montoBitcoin)*-1"
+                              :cripto-total-bitcoin="($store.state.bitcoinStore.totalBid
+                              * montoBitcoin)*-1"
                               :cripto-number-bitcoin="montoBitcoin*-1"
                               cripto-name-eth="Etherium"
-                              :cripto-total-eth="(EthSelected.totalBid * montoEtherium)*-1"
+                              :cripto-total-eth="($store.state.ethereumStore.totalBid
+                              * montoEtherium)*-1"
                               :cripto-number-eth="montoEtherium*-1"
                               cripto-name-usdc="Usdc"
                               :cripto-number-usdc="montoUsdc*-1"
-                              :cripto-total-usdc="(UsdcSelected.totalBid * montoUsdc)*-1">
+                              :cripto-total-usdc="($store.state.usdcStore.totalBid
+                              * montoUsdc)*-1">
   </detalle-analisis-de-estado>
   <span>{{FilterComputed}}</span>
 </template>
@@ -17,7 +20,6 @@
 <script>
 import BuyAndSellService from '../services/BuyAndSellService';
 import DetalleAnalisisDeEstado from '../components/DetalleAnalisisDeEstado.vue';
-import cryptoService from '../services/cryptoService';
 
 export default {
   name: 'AnalisisDeEstado',
@@ -30,28 +32,12 @@ export default {
       montoBitcoin: null,
       montoEtherium: null,
       montoUsdc: null,
-      BitcoinSelected: null,
-      EthSelected: null,
-      UsdcSelected: null,
-
     };
   },
   created() {
     BuyAndSellService.getApiBuyAndSell().then((result) => {
       console.log(result.data);
       this.BuyAndSell = result.data;
-    });
-    cryptoService.getApiBtc().then((result) => {
-      console.log(result.data);
-      this.BitcoinSelected = result.data;
-    });
-    cryptoService.getApiEth().then((result) => {
-      console.log(result.data);
-      this.EthSelected = result.data;
-    });
-    cryptoService.getApiUsdc().then((result) => {
-      console.log(result.data);
-      this.UsdcSelected = result.data;
     });
   },
   methods: {

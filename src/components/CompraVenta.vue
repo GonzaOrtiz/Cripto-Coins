@@ -35,7 +35,6 @@
   {{claseCantidadcomputada}}
 </template>
 <script>
-import cryptoService from '../services/cryptoService';
 import BuyAndSellService from '../services/BuyAndSellService';
 
 export default {
@@ -43,9 +42,6 @@ export default {
   data() {
     return {
       transaction: [],
-      BitcoinSelected: [],
-      EthSelected: [],
-      UsdcSelected: [],
       valorCriptoUnidad: null,
       CantidadTotal: null,
       ActionEs: null,
@@ -58,20 +54,6 @@ export default {
         Fecha: new Date(),
       },
     };
-  },
-  created() {
-    cryptoService.getApiBtc().then((result) => {
-      console.log(result.data);
-      this.BitcoinSelected = result.data;
-    });
-    cryptoService.getApiEth().then((result) => {
-      console.log(result.data);
-      this.EthSelected = result.data;
-    });
-    cryptoService.getApiUsdc().then((result) => {
-      console.log(result.data);
-      this.UsdcSelected = result.data;
-    });
   },
   computed: {
     claseCantidadcomputada() {
@@ -116,21 +98,21 @@ export default {
     validarSelects() {
       if (this.Operacion.Criptomoneda === 'Bitcoin') {
         if (this.Operacion.Movimiento === 'Comprar') {
-          this.valorCriptoUnidad = this.BitcoinSelected.totalAsk;
+          this.valorCriptoUnidad = this.$store.state.bitcoinStore.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
-          this.valorCriptoUnidad = this.BitcoinSelected.totalBid;
+          this.valorCriptoUnidad = this.$store.state.bitcoinStore.totalBid;
         }
       } else if (this.Operacion.Criptomoneda === 'Etherium') {
         if (this.Operacion.Movimiento === 'Comprar') {
-          this.valorCriptoUnidad = this.EthSelected.totalAsk;
+          this.valorCriptoUnidad = this.$store.state.ethereumStore.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
-          this.valorCriptoUnidad = this.EthSelected.totalBid;
+          this.valorCriptoUnidad = this.$store.state.ethereumStore.totalBid;
         }
       } else if (this.Operacion.Criptomoneda === 'Usdc') {
         if (this.Operacion.Movimiento === 'Comprar') {
-          this.valorCriptoUnidad = this.UsdcSelected.totalAsk;
+          this.valorCriptoUnidad = this.$store.state.usdcStore.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
-          this.valorCriptoUnidad = this.UsdcSelected.totalBid;
+          this.valorCriptoUnidad = this.$store.state.usdcStore.totalBid;
         }
       }
       this.Operacion.CriptomonedaTotal = (this.Operacion.Cantidad

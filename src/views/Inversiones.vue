@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import cryptoService from '../services/cryptoService';
+// import cryptoService from '../services/cryptoService';
 import BuyAndSellService from '../services/BuyAndSellService';
 
 export default {
@@ -44,10 +44,7 @@ export default {
   data() {
     return {
       transaction: [],
-      BitcoinSelected: [],
-      EthSelected: [],
       BuyAndSell: [],
-      UsdcSelected: [],
       DifmoneyBitcoin: 0,
       DifMoneyEthereum: 0,
       moneyBitcoin: 0,
@@ -78,18 +75,6 @@ export default {
     };
   },
   created() {
-    cryptoService.getApiBtc().then((result) => {
-      console.log(result.data);
-      this.BitcoinSelected = result.data;
-    });
-    cryptoService.getApiEth().then((result) => {
-      console.log(result.data);
-      this.EthSelected = result.data;
-    });
-    cryptoService.getApiUsdc().then((result) => {
-      console.log(result.data);
-      this.UsdcSelected = result.data;
-    });
     BuyAndSellService.getApiBuyAndSell().then((result) => {
       console.log(result.data);
       this.BuyAndSell = result.data;
@@ -150,7 +135,8 @@ export default {
       // Calculos BITCOIN
       if ((this.cantidadBitcoinVendido - this.cantidadBitcoinComprado) !== 0) {
         this.saldoCompradoBitcoin = this.cantidadBitcoinComprado * this.moneyBitcoinComprado;
-        this.saldoActualBitcoinMoney = this.BitcoinSelected.totalBid * this.cantidadBitcoinComprado;
+        this.saldoActualBitcoinMoney = this.$store.state.bitcoinStore.totalBid
+          * this.cantidadBitcoinComprado;
         this.resultadoBitcoin = this.saldoActualBitcoinMoney - this.saldoCompradoBitcoin;
         this.totalBitcoin = this.resultadoBitcoin + this.DifmoneyBitcoin;
       } else {
@@ -159,7 +145,8 @@ export default {
       // Calculos ETHEREUM
       if ((this.cantidadEthereumVendido - this.cantidadEthereumComprado) !== 0) {
         this.saldoCompradoEthereum = this.cantidadEthereumComprado * this.moneyEthereumComprado;
-        this.saldoActualEthereumMoney = this.EthSelected.totalBid * this.cantidadEthereumComprado;
+        this.saldoActualEthereumMoney = this.$store.state.ethereumStore.totalBid
+          * this.cantidadEthereumComprado;
         this.resultadoEthereum = this.saldoActualEthereumMoney - this.saldoCompradoEthereum;
         this.totalEthereum = this.resultadoEthereum + this.DifMoneyEthereum;
       } else {
@@ -168,7 +155,8 @@ export default {
       // Calculos USDC
       if ((this.cantidadUsdcVendido - this.cantidadUsdcVendido) !== 0) {
         this.saldoCompradoUsdc = this.cantidadUsdcComprado * this.moneyUsdcomprado;
-        this.saldoActualUsdcMoney = this.UsdcSelected.totalBid * this.cantidadUsdcComprado;
+        this.saldoActualUsdcMoney = this.$store.state.usdcStore.totalBid
+          * this.cantidadUsdcComprado;
         this.resultadoUsdc = this.saldoActualUsdcMoney - this.saldoCompradoUsdc;
         this.totalUsdc = this.resultadoUsdc + this.DifMoneyUsdc;
       } else {

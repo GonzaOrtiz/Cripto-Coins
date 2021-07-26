@@ -86,6 +86,7 @@ export default {
   },
   data() {
     return {
+      fecha: null,
       BuyAndSell: [],
       EditId: null,
       Edit: [],
