@@ -1,6 +1,9 @@
 <template>
 <h1>Inversiones</h1>
-  <div class="card mx-auto" style="width: 22rem;">
+  <div class="spinner-border text-warning" role="status" v-if="totalBitcoin === 0">
+    <span class="sr-only"></span>
+  </div>
+  <div class="card mx-auto" style="width: 22rem;" v-if="totalBitcoin !== 0">
     <div class="card-body">
       <table class="table table-hover table-responsive">
         <thead>
@@ -36,7 +39,6 @@
 </template>
 
 <script>
-// import cryptoService from '../services/cryptoService';
 import BuyAndSellService from '../services/BuyAndSellService';
 
 export default {

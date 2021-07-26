@@ -1,5 +1,8 @@
 <template>
 <h1>Análisis del estado actual</h1>
+  <div class="spinner-border text-warning" role="status" v-if="montoBitcoin === null">
+    <span class="sr-only"></span>
+  </div>
   <detalle-analisis-de-estado v-if="montoBitcoin !== null"
                               cripto-name-bitcoin="Bitcoin"
                               :cripto-total-bitcoin="($store.state.bitcoinStore.totalBid

@@ -1,6 +1,5 @@
 <template>
-  <div id="nav" v-if="!$store.state.accesoTotal">
-    <router-link to="/">Inicio</router-link> |
+  <div id="nav" v-if="$store.state.accesoTotal">
     <router-link to="/menu" >Menu</router-link> |
     <router-link to="/operar">Operar</router-link>|
     <router-link to="/historial">Historial</router-link> |
@@ -10,11 +9,10 @@
     <body >
     </body>
   </div>
-  <div id="nav2" v-if="$store.state.accesoTotal">
+  <div id="nav2" v-if="!$store.state.accesoTotal">
     <router-link to="/">Inicio</router-link> |
     <router-link to="/menu" >Menu</router-link> |
     <router-link to="/about">Autor</router-link>
-    <router-link to="/probandoArray">Array</router-link>
     <body >
     </body>
   </div>

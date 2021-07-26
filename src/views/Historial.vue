@@ -1,12 +1,12 @@
 <template>
   <div class="about">
   </div>
-  <div class="spinner-border text-warning" role="status" v-if="BuyAndSell.length === 0">
-    <span class="sr-only"></span>
-  </div>
 <!--  ********DataTableHistorialDeMovimientos*********-->
   <div v-if="HistorialView">
   <h1 >Historial de Movimientos</h1>
+    <div class="spinner-border text-warning" role="status" v-if="BuyAndSell.length === 0">
+      <span class="sr-only"></span>
+    </div>
   <div class="card mx-auto" style="width: 60rem;"
        v-if="BuyAndSell.length !== 0 && HistorialView">
     <div class="card-body">

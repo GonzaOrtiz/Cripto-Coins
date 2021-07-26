@@ -2,13 +2,14 @@
   <div class="hello">
     <div id="nav">
       <h1 v-if="bienvenido">Bienvenido Gonzalo</h1>
+      <h3 v-if="bienvenido">Ya puedes comenzar a operar</h3>
       <h1 v-if="!bienvenido">Ingresar</h1>
       <div class="card mx-auto" style="width: 18rem;" v-if="!bienvenido">
         <div class="card-body">
             <div class="mb-3">
               <input class="form-control"
                      :class="claseCantidadcomputada" aria-describedby="emailHelp"
-                      v-model="login">
+                      v-model="login" type="password">
               <div id="emailHelp" class="form-text"></div>
             </div>
             <button type="submit" class="btn btn-primary"
@@ -47,6 +48,9 @@ export default {
       if (this.login === this.$store.state.loginCorrecto) {
         this.$store.commit('LOGIN_MODIFICAR', true);
         this.bienvenido = true;
+      } else {
+        alert('Error al ingresar Usuario');
+        this.login = '';
       }
     },
   },
@@ -75,6 +79,10 @@ h1 {
 </style>
 <style scoped>
 h1 {
+  font-weight: bold;
+  color: white;
+}
+h3 {
   font-weight: bold;
   color: white;
 }

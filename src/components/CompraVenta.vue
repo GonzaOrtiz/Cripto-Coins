@@ -31,8 +31,6 @@
       </div>
     </div>
   </div>
-  {{valorCriptoUnidad}}
-  {{claseCantidadcomputada}}
 </template>
 <script>
 import BuyAndSellService from '../services/BuyAndSellService';
@@ -81,7 +79,6 @@ export default {
         money: this.Operacion.CriptomonedaTotal,
         datetime: this.Operacion.Fecha,
       }];
-      debugger;
       BuyAndSellService.postApiBuyAndSell(this.transaction)
         .then((response) => {
           console.log(response);
@@ -115,8 +112,6 @@ export default {
           this.valorCriptoUnidad = this.$store.state.usdcStore.totalBid;
         }
       }
-      this.Operacion.CriptomonedaTotal = (this.Operacion.Cantidad
-        * this.valorCriptoUnidad).toFixed(2);
     },
   },
 };

@@ -21,9 +21,6 @@
             <td>{{ detalle.datetime}}</td>
           </tr>
           </tbody>
-          <p align="right" >
-            <button type="submit" class="btn btn-primary" @click="backToHistory">Regresar</button>
-          </p>
         </table>
       </div>
   </div>
@@ -36,11 +33,6 @@ export default {
     detalle: {
       type: Array,
       required: true,
-    },
-  },
-  methods: {
-    backToHistory() {
-      alert('retornar a la tabla');
     },
   },
 };
