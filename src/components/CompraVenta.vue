@@ -31,8 +31,11 @@
       </div>
     </div>
   </div>
+  {{valorCriptoUnidad}}
+  {{claseCantidadcomputada}}
 </template>
 <script>
+import cryptoService from '../services/cryptoService';
 import BuyAndSellService from '../services/BuyAndSellService';
 
 export default {
@@ -40,6 +43,9 @@ export default {
   data() {
     return {
       transaction: [],
+      BitcoinSelected: [],
+      EthSelected: [],
+      UsdcSelected: [],
       valorCriptoUnidad: null,
       CantidadTotal: null,
       ActionEs: null,
@@ -52,6 +58,20 @@ export default {
         Fecha: new Date(),
       },
     };
+  },
+  created() {
+    cryptoService.getApiBtc().then((result) => {
+      console.log(result.data);
+      this.BitcoinSelected = result.data;
+    });
+    cryptoService.getApiEth().then((result) => {
+      console.log(result.data);
+      this.EthSelected = result.data;
+    });
+    cryptoService.getApiUsdc().then((result) => {
+      console.log(result.data);
+      this.UsdcSelected = result.data;
+    });
   },
   computed: {
     claseCantidadcomputada() {
@@ -79,6 +99,7 @@ export default {
         money: this.Operacion.CriptomonedaTotal,
         datetime: this.Operacion.Fecha,
       }];
+      debugger;
       BuyAndSellService.postApiBuyAndSell(this.transaction)
         .then((response) => {
           console.log(response);
@@ -95,28 +116,29 @@ export default {
     validarSelects() {
       if (this.Operacion.Criptomoneda === 'Bitcoin') {
         if (this.Operacion.Movimiento === 'Comprar') {
-          this.valorCriptoUnidad = this.$store.state.bitcoinStore.totalAsk;
+          this.valorCriptoUnidad = this.BitcoinSelected.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
-          this.valorCriptoUnidad = this.$store.state.bitcoinStore.totalBid;
+          this.valorCriptoUnidad = this.BitcoinSelected.totalBid;
         }
       } else if (this.Operacion.Criptomoneda === 'Etherium') {
         if (this.Operacion.Movimiento === 'Comprar') {
-          this.valorCriptoUnidad = this.$store.state.ethereumStore.totalAsk;
+          this.valorCriptoUnidad = this.EthSelected.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
-          this.valorCriptoUnidad = this.$store.state.ethereumStore.totalBid;
+          this.valorCriptoUnidad = this.EthSelected.totalBid;
         }
       } else if (this.Operacion.Criptomoneda === 'Usdc') {
         if (this.Operacion.Movimiento === 'Comprar') {
-          this.valorCriptoUnidad = this.$store.state.usdcStore.totalAsk;
+          this.valorCriptoUnidad = this.UsdcSelected.totalAsk;
         } else if (this.Operacion.Movimiento === 'Vender') {
-          this.valorCriptoUnidad = this.$store.state.usdcStore.totalBid;
+          this.valorCriptoUnidad = this.UsdcSelected.totalBid;
         }
       }
+      this.Operacion.CriptomonedaTotal = (this.Operacion.Cantidad
+        * this.valorCriptoUnidad).toFixed(2);
     },
   },
 };
 </script>
-
 <style scoped>
 h1 {
   font-weight: bold;
